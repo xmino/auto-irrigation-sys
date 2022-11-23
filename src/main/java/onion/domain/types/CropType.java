@@ -6,5 +6,14 @@ public enum CropType {
     FIBER,
     OIL,
     ORNAMENTAL,
-    INDUSTRIAL
+    INDUSTRIAL,
+    UNKNOWN;
+
+    public static CropType safeLookup(String type) {
+        try {
+            return CropType.valueOf(type);
+        } catch (IllegalArgumentException e) {
+            return CropType.UNKNOWN;
+        }
+    }
 }
