@@ -8,10 +8,10 @@
         <version>2.7.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <artifactId>auto-irrigation</artifactId>
+    <artifactId>auto-irrigation-sys</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>auto-irrigation</name>
-    <description>auto-irrigation</description>
+    <name>auto-irrigation-sys</name>
+    <description>amples Rests Services for Irrigation Systems</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -44,6 +44,23 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.hamcrest</groupId>
+                    <artifactId>hamcrest-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.jeasy</groupId>
+            <artifactId>easy-random-core</artifactId>
+            <version>5.0.0</version>
         </dependency>
     </dependencies>
 
