@@ -1,5 +1,6 @@
 package onion.api;
 
+import onion.api.dto.in.PlotIn;
 import onion.api.dto.out.PlotOut;
 import onion.api.service.PlotService;
 import onion.domain.plot.Plot;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -56,6 +58,19 @@ public class PlotServiceTest {
         List<PlotOut> result = plotService.findAllPlots();
 
         assertThat(result, is(Collections.singletonList(PlotOut.fromDomain(plot))));
+
+    }
+
+    @Test
+    public void createPlot_returnValue() {
+
+        PlotIn plotIn = random.nextObject(PlotIn.class);
+        Plot plot = plotIn.toDomain();
+        when(plotRepository.save(any(Plot.class))).thenReturn(plot);
+
+        PlotOut result = plotService.createPlot(plotIn);
+
+        assertThat(result, is(PlotOut.fromDomain(plot)));
 
     }
 
