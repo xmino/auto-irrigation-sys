@@ -15,6 +15,7 @@ import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -61,5 +62,56 @@ public class IntegrationRoutePlotControllerTest {
                                                  "    \"cro1p\":\"FOOD\"\n" +
                                                  "}"))
                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void editPlot_Create() throws Exception{
+        mockMvc.perform(put("/auto-irrigation/v1/plots/4fc63668-6a38-11ed-a1eb-0242ac120002")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content("{\n" +
+                                                 "    \"name\":\"Test1\",\n" +
+                                                 "    \"cultivatedArea\":\"1000\",\n" +
+                                                 "    \"crop\":\"FOOD\"\n" +
+                                                 "}"))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.id").exists());
+    }
+
+    @Test
+    public void editPlot_whenIdDontExist_returnNotFound() throws Exception{
+        mockMvc.perform(put("/auto-irrigation/v1/plots/4fc63668-6a38")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content("{\n" +
+                                                 "    \"name\":\"Test1\",\n" +
+                                                 "    \"cultivatedArea\":\"1000\",\n" +
+                                                 "    \"crop\":\"FOOD\"\n" +
+                                                 "}"))
+               .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void configurePlot_addTimeSlotToPlot() throws Exception{
+        mockMvc.perform(post("/auto-irrigation/v1/plots/configure/4fc63668-6a38-11ed-a1eb-0242ac120002")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content("{\n" +
+                                                 "    \"init\":1604531772,\n" +
+                                                 "    \"durationMinutes\":\"20\",\n" +
+                                                 "    \"amountWater\":\"100\",\n" +
+                                                 "    \"status\":\"PENDING\"\n" +
+                                                 "}"))
+               .andExpect(status().isOk());
+    }
+
+    @Test
+    public void configurePlot_whenIdDontExist_returnNotFound() throws Exception{
+        mockMvc.perform(post("/auto-irrigation/v1/plots/configure/4fc63668-6a38")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content("{\n" +
+                                                 "    \"init\":1604531772,\n" +
+                                                 "    \"durationMinutes\":\"20\",\n" +
+                                                 "    \"amountWater\":\"100\",\n" +
+                                                 "    \"status\":\"PENDING\"\n" +
+                                                 "}"))
+               .andExpect(status().isNotFound());
     }
 }

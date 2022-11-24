@@ -26,12 +26,17 @@ public class PlotIn {
     private final String crop;
 
     public Plot toDomain(){
+        return toDomain(UUID.randomUUID().toString());
+    }
+
+    public Plot toDomain(String id){
         return Plot.builder()
-                   .id(UUID.randomUUID().toString())
+                   .id(id)
                    .name(getName())
                    .crop(CropType.safeLookup(getCrop()))
                    .cultivatedArea(getCultivatedArea())
                    .createdTime(Instant.now())
+                   .updatedTime(Instant.now())
                    .build();
     }
 

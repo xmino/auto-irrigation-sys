@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import onion.domain.types.CropType;
+import onion.domain.types.SlotStatus;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -14,14 +14,16 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.time.Instant;
 
 @Data
-@Entity(name = "plots")
+@Entity(name = "time_slot")
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Plot {
+public class TimeSlot {
 
     @Id
     @Column
@@ -29,15 +31,19 @@ public class Plot {
 
     @Column
     @NotNull
-    private String name;
+    private Instant init;
 
-    @Column(name = "cultivated_area")
+    @Column(name = "duration_minutes")
     @NotNull
-    private Double cultivatedArea;
+    private Integer durationMinutes;
+
+    @Column(name = "amount_water")
+    @NotNull
+    private Integer amountWater;
 
     @Enumerated(EnumType.STRING)
     @NotNull
-    private CropType crop;
+    private SlotStatus status;
 
     @CreationTimestamp
     @Column(name = "created_time")
@@ -46,7 +52,10 @@ public class Plot {
 
     @UpdateTimestamp
     @Column(name = "updated_time")
-    @NotNull
     private Instant updatedTime;
+
+    @ManyToOne
+    @JoinColumn(name = "plot_id")
+    private Plot plot;
 
 }
