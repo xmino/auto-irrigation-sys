@@ -18,4 +18,6 @@ public interface PlotService {
     PlotOut updatePlot(Plot plot);
 
     void saveTimeSlot(TimeSlotIn slot, String plotId);
+
+    void updateTimeSlot(TimeSlot slot);
 }

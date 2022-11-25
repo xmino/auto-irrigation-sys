@@ -6,6 +6,7 @@ import onion.api.dto.in.PlotIn;
 import onion.api.dto.in.TimeSlotIn;
 import onion.api.dto.out.PlotOut;
 import onion.api.service.PlotService;
+import onion.domain.irrigation.IrrigationService;
 import onion.domain.plot.Plot;
 import onion.domain.plot.PlotRepository;
 import onion.domain.plot.TimeSlot;
@@ -22,6 +23,8 @@ public class PlotServiceApi implements PlotService {
 
     private final PlotRepository plotRepository;
     private final TimeSlotRepository timeSlotRepository;
+
+    private final IrrigationService irrigationService;
 
     @Override
     public List<PlotOut> findAllPlots() {
@@ -44,6 +47,12 @@ public class PlotServiceApi implements PlotService {
         Plot plot = plotRepository.getReferenceById(plotId);
         TimeSlot timeSlot = slot.toDomain().toBuilder().plot(plot).build();
         timeSlotRepository.save(timeSlot);
+        irrigationService.scheduleIrrigation(timeSlot);
+    }
+
+    @Override
+    public void updateTimeSlot(TimeSlot slot) {
+        timeSlotRepository.save(slot);
     }
 
 }
