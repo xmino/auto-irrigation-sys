@@ -1,8 +1,8 @@
 package onion.api.dto.out;
 
+import lombok.Data;
 import onion.domain.plot.Plot;
 import onion.domain.types.CropType;
-import lombok.Data;
 
 @Data
 public class PlotOut {

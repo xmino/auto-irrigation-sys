@@ -1,9 +1,7 @@
 package onion.infra.scheduled;
 
 import onion.domain.plot.TimeSlot;
-import onion.infra.alerts.SensorAlert;
 import onion.infra.rest.RestIrrigationSystem;
-import org.springframework.beans.factory.annotation.Autowired;
 
 
 public class IrrigationTask implements Runnable{

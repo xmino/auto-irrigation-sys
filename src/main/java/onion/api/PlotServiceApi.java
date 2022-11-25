@@ -2,7 +2,6 @@ package onion.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import onion.api.dto.in.PlotIn;
 import onion.api.dto.in.TimeSlotIn;
 import onion.api.dto.out.PlotOut;
 import onion.api.service.PlotService;

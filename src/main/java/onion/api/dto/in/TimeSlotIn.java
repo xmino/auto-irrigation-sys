@@ -1,16 +1,12 @@
 package onion.api.dto.in;
 
 import lombok.Data;
-import onion.domain.plot.Plot;
 import onion.domain.plot.TimeSlot;
-import onion.domain.types.CropType;
 import onion.domain.types.SlotStatus;
 
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.util.UUID;
 

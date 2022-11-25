@@ -1,6 +1,5 @@
 package onion.api.service;
 
-import onion.api.dto.in.PlotIn;
 import onion.api.dto.in.TimeSlotIn;
 import onion.api.dto.out.PlotOut;
 import onion.domain.plot.Plot;
