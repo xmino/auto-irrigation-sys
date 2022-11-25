@@ -14,7 +14,10 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity(name = "plots")
@@ -48,5 +51,8 @@ public class Plot {
     @Column(name = "updated_time")
     @NotNull
     private Instant updatedTime;
+
+    @OneToMany(mappedBy = "plot")
+    private List<TimeSlot> timeSlots = new ArrayList<>();
 
 }
